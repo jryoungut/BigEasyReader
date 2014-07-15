@@ -1,0 +1,485 @@
+#spritzer, [data-role="spritzer"] {
+    margin: 1.5em 0;
+}
+
+.spacer-b {
+    margin-bottom: 1em;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.btn-primary {
+    margin: 5px 0;
+    background-color: #1e85b4;
+    border-color: #1a759e;
+    background-color: #387BCA;
+    border-color: #387BCA;
+}
+
+    .btn-primary:hover {
+        background-color: #176588;
+        border-color: #135572;
+    }
+
+.btn-default {
+    background-color: #fafafa;
+}
+
+
+.pbsWhite {
+    background-color:#fff;
+    padding:4px;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #d3d3d3;
+    background: #058CDE url(../images/ui-bg_glass_75_blue_1x400.png) 50% 50% repeat-x;
+    font-weight: normal;
+    color: #fff;
+}
+
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 2.2em;
+    height: 2.2em;
+    cursor: default;
+}
+
+.ui-slider-horizontal {
+    height: 1.8em;
+}
+.bigselect {
+    font-size:36px;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+    font-size: 3.8em;
+    font-weight: bold;
+    /*letter-spacing: .1em;*/
+       padding: .2em 0;
+    /*text-shadow: 2px 0 0 #fff, 0 -2px 0 #fff, 0 2px 0 #fff, -2px 0 0 #fff;*/
+    color:#ffffee;
+}
+.ui-mobile label, div.ui-controlgroup-label {
+    font-size:3em;
+    margin:0;
+    color:#ffffee;
+}
+.ui-input-text input, .ui-input-search input {
+    font-size:4.2em;
+    padding:.01em;
+}
+
+.ui-input-text, .ui-input-search {
+    margin:0;
+}
+
+    .ui-alt-icon.ui-icon-search:after, .ui-alt-icon .ui-icon-search:after, .ui-input-search:after {
+        background-image:none;
+    }
+    .ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear, .ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear {
+        margin:-54px -10px;
+    }
+    
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper{
+	text-shadow: 0 0 0;
+}
+    
+#btnLogIn,
+#btnSignUp,
+#btnLogInPage,
+#btnSignUpPage,
+#btnOKSignUp,
+#btnLogOut,
+#btnHome,
+#btnSettings,
+#btnFeedback,
+#btnAboutUs,
+#btnInstructions,
+#hdrBack,
+#selActions,
+#hdrNone,
+#hdrReset {
+    font-size:3em;
+    font-weight:bold;
+    margin:0 .1em;
+    padding:.1em .6em .1em .6em;
+}
+#txtFooterTitle{
+    font-size:1.6em;
+	font-weight:normal;
+	letter-spacing:.2em;
+    min-height: 1.1em;
+    text-align: center;
+    display: block;
+    margin: 0;
+    padding: .7em 0;
+    white-space: nowrap;
+    outline: 0!important;
+}
+
+.btnBlock {
+    cursor:pointer;
+    display:inline-block;
+    font-size:72px;
+    font-weight:bold;
+    padding:.3em;
+    width:40%;
+    min-width:30px;
+    margin:0 22px 20px 0;
+    /*text-shadow: 2px 0 0 #fff, 0 -2px 0 #fff, 0 2px 0 #fff, -2px 0 0 #fff;*/
+   }
+.btnBlockDark {
+    color:#ffffee;
+    background-color:#000011;
+    border:3px solid #fff;
+    border-left:33px solid #fff;
+}
+.btnBlockDarkHover {
+    color:#000011;
+    background-color:#ffffee;
+}
+.btnBlockBlue {
+    color:#333;
+    background-color:blue;
+    background-color:#99CCFF;
+    border:1px solid #1F8FFF;
+    color:#ffffee;
+    background-color:#000011;
+    border:3px solid #fff;
+    border-left:33px solid #fff;
+}
+.btnBlockGreen {
+    color:#333;
+    background-color:#16A503;
+    background-color:#B4FDAA;
+    border:1px solid #7FFB6F;
+}
+.btnBlockRed {
+    color:#333;
+    background-color:#FF9E9E;
+    border:1px solid #FB4128;
+}
+.btnBlockViolet {
+    color:#333;
+    background-color:#E0C2F0;
+    border:1px solid #CA95E4;
+}
+.btnBlockOrange {
+    color:#333;
+    background-color:#FFD699;
+    border:1px solid #FF6600;
+}
+
+#txtPleaseLogInText {
+    font-size:5.2em;
+    text-align:center;
+    background-color:#000011;
+    color:#ffffee;
+    padding:.4em 0;
+}
+#txtPleaseLogInText #btnLogIn {
+    font-size:inherit;
+}
+#txtPleaseLogInText #btnSignUp {
+    font-size:inherit;
+}
+#txtPleaseLogInText .poweredBySpritz{
+	font-size:.5em;
+}
+@media (max-width:767px) {
+#txtPleaseLogInText {
+    font-size:3.2em;
+    text-align:center;
+    color:#ffffee;
+    background-color:#000011;
+    padding:.2em 0;
+}
+#txtPleaseLogInText .poweredBySpritz{
+	font-size:.5em;
+}
+}
+
+#spritzerWelcomeHolder{
+	text-align: center !important;	
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper{
+    background-color:#000011 ;
+}
+
+#inputText{
+    min-height: 200px;
+    background-color: #FFFFE5;
+    margin-right: 10px;
+}
+.ui-btn {
+    font-size: 4.8em;
+    padding: .1em .3em;
+}
+.ui-header{
+    min-height:95px;
+}
+.webLinkInput{
+    font-size: 3.2em;
+}
+.hide{
+    display:none !important;
+}
+#faster{
+    background-color:#B2FFD1;
+    width: 1.5em;
+}
+#slower{
+    background-color:#FFDAC2;
+    width: 1.5em;
+    margin-right:.1em;
+}
+/*#spnSpeed{
+    font-size: 60px;
+    color:#fff;
+    padding:20px 10px 0 0;
+}*/
+.controls-container .dropdown-toggle{
+    display: none;
+}
+.rprBtn{
+    min-width:320px !important;
+    max-width: 320px !important;
+}
+.spritzBtnHolder{
+    -webkit-border-radius: .3125em !important;
+    border-radius: .3125em !important;
+    margin-top: 6px !important;
+    margin-right: 13px !important;
+}
+.spritzBtn{
+    background-image: url(http://sdk.spritzinc.com/js/1.0/images/sprite.png) !important;
+    width: 134px;
+    height: 30px;
+    background-position: 25px -150px !important;
+    background-repeat: no-repeat !important;
+    margin-top: 20px !important;
+    margin-bottom: 19px !important;
+    display: inline-block;
+}
+.controls-container .powered-by-spritz{
+    display:none;
+}
+.fieldInstructions{
+    border-top:2px solid #ffffee;
+    font-size:2.4em;
+    margin-top:50px;
+    margin-bottom:0px;
+    color:#ffffee;
+}
+.ui-select {
+    position: relative;
+    top:17px;
+}
+#selectSpeed-button {
+    padding-top:15px;
+    display:none;
+}
+div.ui-slider{
+    height:80px !important;
+}
+input.ui-slider-input{
+    font-size:80px;
+    font-weight:normal;
+    width: 180px;
+    height: 120px;
+    line-height: 100px;
+}
+.ui-slider-track {
+    height: 75px;
+    margin: 0 55px 0 240px;
+    top: 26px;
+}
+
+.ui-slider-track .ui-btn.ui-slider-handle{
+    width: 88px;
+    height: 88px;
+    margin: -45px 0 0 -15px;
+}
+
+.ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit{
+    background-color:#000011;
+    color:#ffffee;
+}
+
+#speedHolder{
+    border-top:2px groove #333;
+    padding:5px 0 0 0;
+}
+
+.spritz-canvas{
+    background-color:#000011;    
+}
+
+.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{
+	background-color: #444;
+	color:#ffffee;
+	text-shadow: 0 0 0;
+}
+.ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head+body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head+body .ui-btn.ui-btn-a:visited{
+	background-color: #444 !important;
+	color:#ffffee;
+	text-shadow: 0 0 0;
+}
+
+#newsStories li a.ui-btn{
+	font-weight:normal;
+	font-size:3.8em;
+}
+#newsStories li a.ui-btn:hover{
+	color:#FAFA00;
+}
+
+#txtPleaseLogInText a .ui-btn:hover{
+	background-color: #444 !important;
+	color:#ffff00;
+	text-shadow: 0 0 0;
+}
+
+.themeDark{
+	background-color: #000011 !important;
+	color:#ffffee !important;
+}
+.themeLight{
+	background-color: #eeeeff !important;
+	color:#000011 !important;
+}
+.themeFontSmall{
+	font-size:40px !important;
+}
+.themeFontMedium{
+	font-size:60px !important;
+}
+.themeFontLarge{
+	font-size:80px !important;
+}
+
+.ui-header .ui-title, .ui-header table tr td h3, .ui-footer .ui-title{
+	font-size:4em;
+	line-height:1em;
+	margin: 0 10%;
+	text-align:center;
+}
+.themeSelect{
+	font-size:5em;
+	line-height:1em;
+}
+
+.ezRadio{
+	display:none !important;
+}
+.spritzer-container{
+	background-color:transparent;
+	border:none;
+}
+.spritzer-container .spritzer-speed,
+.spritzer-container .spritzer-header{
+	display:none;
+}
+
+.spritzer-login-btn{
+	/*position:absolute;
+	top:0;
+	/*left:0;*/	
+	font-size:36px;
+	}
+/*.spritzer-container .spritzer-speed,
+.spritzer-container .spritzer-header{
+	display:none;
+}*/
+.ui-footer{
+	border-bottom:none;
+}
+
+.alignCenter{
+	text-align:center;
+}
+
+.listAside{
+	float: right;
+	margin-right: 2em;
+	font-size: .5em;
+	margin-top: .57em;
+}
+
+.ctrlBtn{
+	margin-right:10px;
+	cursor:pointer;
+}
+.ctrlBtnSpacerLeft{
+	margin-left:30px;
+}
+.clear{
+	clear:both;
+}
+#sizerHolder,
+#speederHolder{
+	display:block;
+	/*height:300px;*/	
+}
+
+.divGlassCover{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+}
+.fixationPoint{
+	position:absolute;
+	z-index:100;
+}
+
+.divCtrlHolder{
+	clear: left;
+	position:relative;
+}
+
+.subTitle{
+	text-align:center;
+}
+.subTitle h3{
+	font-size:3.2em;
+	margin:0;
+	color:#fff;
+	letter-spacing:.1em;
+}
+
+p {
+	display: block;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+.tblHeader{
+	
+}
+.tblHeader tr td:first-child{
+    width:5%;
+    white-space:nowrap;
+    text-align:left;
+}
+.tblHeader tr td:last-child {
+    width:5%;
+    white-space:nowrap;
+    text-align:right;
+}
+.tblHeader tr td {
+    width:100%;
+    text-align:center;
+}

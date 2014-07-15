@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/my.css">
+
+    <!-- jQuery dependency -->
+    <script type="text/javascript" src="//sdk.spritzinc.com/jQuery/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="//sdk.spritzinc.com/js/1.0/js/spritz.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!--<script type="text/javascript" src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>-->
+    <!-- Global settings for the examples -->
+    <script type="text/javascript">
+        var host = window.location.hostname;
+        var http = location.protocol;
+        var slashes = http.concat("//");
+        var locandfile = '/sr/login_success.html';
+        host = host.concat(locandfile);
+
+        var SpritzSettings = {
+            clientId: "cc7314548848c6af2",
+            //redirectUri: "http://youngandinnovative.com/sr/login_success.html",
+            redirectUri: host,
+        };
+        var spritzController = null;
+        var onFetchSuccessController = function (spritzText) {
+            spritzController.startSpritzing(spritzText);
+        };
+
+        var onFetchError = function (error) {
+            alert("Unable to Spritz: " + error.message);
+        };
+
+        var onStartSpritzClick = function (event) {
+            var element = $(event.currentTarget);
+            var url = element[0].dataset.url;
+            SpritzClient.fetchContents(url, onFetchSuccessController, onFetchError);
+        };
+
+        var spritzerOptions = {
+        			"redicleWidth" : 	340,
+        			"redicleHeight" : 	70,
+        			"defaultSpeed" : 	250, 
+        			"speedItems" : 		[250, 300, 350, 400, 450, 500, 550, 600], 
+        			"controlButtons" : 	["pauseplay", "rewind", "back"],
+        			"controlTitles" : {
+        				"pause" : 		"Pause",
+        				"play" : 		"Play",
+        				"rewind" : 		"Rewind", 
+        				"back" : 		"Previous Sentence"
+        			}
+        	};
+
+        var init = function () {
+            $("#textList").on("change", onTextSelected);
+            $("#startSpritz").on("click", onStartSpritzClick);
+            $(window).resize(function () {
+                var bw = $('.main-body').width() * .95;
+                $('.spritz-canvas').prop('width', bw);
+                $('.spritz-canvas').prop('height', bw * .2);
+            });
+
+            // Construct a SpritzController passing the customization options
+            var bw = $('.main-body').width() * .95;
+            customOptions = {
+                "redicleWidth": bw,					// Specify Redicle width
+                "redicleHeight": bw * .2,				// Specify Redicle height
+                "defaultSpeed": 150, 									// Specify default speed
+                "speedItems": [100, 150, 200, 250, 300, 350, 400],
+            };
+            spritzController = new SPRITZ.spritzinc.SpritzerController(customOptions);
+
+            //////// Attach the controller's container to this page's "spritzer" container
+            //////spritzController.speedDropdownController = null;
+            spritzController.attach($("#spritzer"));
+            //////$('#spritzer').data('controller').setDefaultSpeed(100);
+
+        };
+
+        function onTextSelected() {
+            var option = $('option:selected', this);
+            var name = option.text();
+            var url = option.val();
+
+            $('#selectionTitle').text(name);
+            $('#spritzer').data('controller').setUrl(url);
+            $('#startSpritz')[0].dataset.url = url;
+        }
+
+        $(document).ready(function () {
+            init();
+        });
+    </script>
+
+    <title>Super Reader</title>
+</head>
+<body style="background-color:#ccc;">
+    <!-- Header -->
+    <header class="navbar navbar-static-top main-header">
+        <div class="container-fluid">
+            <div class="col-md-2">
+                <img class="navbar-brand" src="images/ZaycoLogo.png" alt="Zayco Unlimited-logo" />
+            </div>
+            <div class="col-md-10">
+                <span class="site-title">Big <strong>Reader</strong></span>
+            </div>
+        </div>
+        <div class="header-bg"></div>
+    </header>
+    <section class="container-fluid main-body">
+
+        <!-- Main content -->
+        <div class="col-sm-10">
+            <h3 class="no-margin" id="selectionTitle">Wilbur Wright</h3>
+
+            <div id="spritzer" data-url="http://sdk.spritzinc.com/sampleText/WilburWrightLetter.html"></div>
+
+            <div class="spacer-b">
+                <button class="btn btn-primary" id="startSpritz" data-url="http://sdk.spritzinc.com/sampleText/WilburWrightLetter.html">Start Reading</button>
+            </div>
+            <div class="spacer-b">
+                <p>Select something to read:</p>
+                <select id="textList" size="5" class="bigselect">
+                    <option value="http://sdk.spritzinc.com/sampleText/WilburWrightLetter.html">Wilbur Wright</option>
+                    <option value="http://www.archives.gov/exhibits/charters/print_friendly.html?page=declaration_transcript_content.html&title=NARA%20%7C%20The%20Declaration%20of%20Independence%3A%20A%20Transcription">Declaration of Independence</option>
+                    <option value="http://www.youngandinnovative.com/sr/Bible/Matthew/Matthew.html">Matthew - Chapter 1</option>
+                    <option value="http://www.youngandinnovative.com/sr/Books/TheArtOfInventing.txt">The Art of Inventing</option>
+                </select>
+            </div>
+        </div>
+
+
+    </section>
+
+    <footer class="footer"></footer>
+</body>
+</html>

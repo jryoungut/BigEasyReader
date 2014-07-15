@@ -1,0 +1,134 @@
+.footerText{
+    font-size:24px;
+	font-weight:normal;
+	letter-spacing:.2em;
+    min-height: 1.1em;
+    text-align: center;
+    display: block;
+    margin: 0 30%;
+    padding: .7em 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    outline: 0!important;
+}
+
+.alignCenter{
+	text-align:center;
+}
+
+#messageEmail,
+#messageConfirm,
+#messageForm{
+	background-color:#FFEBEB;
+	border:1px solid #B80000;
+	border-left:20px solid #B80000;
+	color: #B80000;
+	margin:4px 0;
+	padding:5px;
+    font-size:24px;
+}
+
+.messageError{
+	background-color:#FFE6CC;
+	border:1px solid #DB6E00;
+	border-left:20px solid #DB6E00;
+	color: #DB6E00;
+	margin:4px 0 20px 0;
+	padding:5px;
+    font-size:24px;
+}
+
+.messageSuccess{
+	background-color:#CCFFCD;
+	border:1px solid #009E00;
+	border-left:20px solid #009E00;
+	color: #009E00;
+	margin:4px 0 20px 0;
+	padding:5px;
+    font-size:24px;
+}
+
+/* Password Strength Stuff*/
+#passwordStrength
+{
+	height:10px;
+	display:block;
+/*
+	float:left;
+*/
+}
+
+.strength0
+{
+	width:250px;
+	width:100%;
+	background:#cccccc;
+}
+
+.strength1
+{
+	width:50px;
+	width:20%;
+	background:#ff0000;
+}
+
+.strength2
+{
+	width:100px;
+	width:40%;
+	background:#ff5f5f;
+}
+
+.strength3
+{
+	width:150px;
+	width:60%;
+	background:#56e500;
+}
+
+.strength4
+{
+	background:#4dcd00;
+	width:200px;
+	width:80%;
+}
+
+.strength5
+{
+	background:#399800;
+	width:250px;
+	width:100%;
+}
+
+.copywrite{
+	font-size:.7em;
+    margin:1em 0;
+}
+.welcomeHeader{
+	font-size:.7em;
+	padding-bottom:5px;
+}
+/* Custom indentations are needed because the length of custom labels differs from
+the length of the standard labels */
+.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+text-indent: -5.9em;
+}
+.custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
+text-indent: 0.5em;
+}
+/* Custom widths are needed because the length of custom labels differs from
+the length of the standard labels */
+.custom-size-flipswitch.ui-flipswitch {
+width: 8.875em;
+}
+.custom-size-flipswitch.ui-flipswitch.ui-flipswitch-active {
+padding-left: 7em;
+width: 1.875em;
+}
+@media (min-width: 28em) {
+    // Repeated from rule .ui-flipswitch above
+    .ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
+        width: 1.875em;
+    }
+}
