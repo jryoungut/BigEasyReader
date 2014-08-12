@@ -29,15 +29,12 @@ switch($err){
     <title>Sign Up</title>
 	<?php include("_jqueryPartial.php"); ?>
 
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/my.css">
-
     <script type="text/javascript">
 	var IsEmailValid = false;
 	var IsPasswordValid = false;
 
 	$(document).ready(function() {
-		$('#myemail').on('keyup blur change paste',function(){
+		$('#myemail2').on('keyup blur change paste',function(){
 			var self = this;
 			setTimeout(function(){
 				var isValid = ($(self).val().length === 0 || IsEmail($(self).val()));
@@ -56,7 +53,7 @@ switch($err){
 		$('#messageEmail').hide();
 
 		$('#mypassword2').keyup(function(){
-			IsPasswordValid = ($(this).val().length === 0 || $(this).val() === $('#mypassword').val());
+			IsPasswordValid = ($(this).val().length === 0 || $(this).val() === $('#mypassword3').val());
 			if(IsPasswordValid === true){
 				$('#messageConfirm').html('');
 				$('#messageConfirm').hide();
@@ -71,16 +68,10 @@ switch($err){
 		$('#messageConfirm').hide();
 		$('#messageForm').hide();
 
-		$('#mypassword').keyup(function(){
+		$('#mypassword3').keyup(function(){
 			PasswordStrength($(this).val());
 		});
 		
-		$('#mybirthdate').datepicker({
-			changeMonth: true,
-      		changeYear: true,
-      		yearRange: '1900:2014'
-		});
-
 		$('#btnOKSignUp').on('click', function(){
 			//Is form valid?
 			var errMsgForm = new Array();
@@ -89,6 +80,20 @@ switch($err){
 			}
 			if(IsPasswordValid === false){
 				errMsgForm.push('Your passwords must match.');
+			}
+			if($.trim($('#myfirstname2').val()).length === 0){
+				errMsgForm.push('Please enter your first name.');
+			}
+			if($.trim($('#mylastname2').val()).length === 0){
+				errMsgForm.push('Please enter your last name.');
+			}
+			if($.trim($('#mybirthmonth').val()).length === 0 && (!parseInt($('#mybirthmonth').val()) >= 1 && !parseInt($('#mybirthmonth').val()) <= 12)){
+				errMsgForm.push('The birth month must be a number between 1 and 12.');
+			}
+			var d = new Date();
+			var y = isNaN(parseInt($('#mybirthyear').val())) === true ? 0 : parseInt($('#mybirthyear').val());
+			if($.trim($('#mybirthyear').val()).length === 0 && (y < 1900 || y > d.getFullYear())){
+				errMsgForm.push('The birth year must be a number between 1900 and ' + d.getFullYear() + '.');
 			}
 
 			if(errMsgForm.length > 0){
@@ -104,7 +109,7 @@ switch($err){
 				$('#messageForm').html("");
 				$('#messageForm').hide();
 				//Submit form
-				$('#signupForm').submit();
+				DoSignUpSubmit();
 			}
 		});
 	});
@@ -144,51 +149,132 @@ switch($err){
 		document.getElementById("passwordDescription").innerHTML = desc[score];
 		document.getElementById("passwordStrength").className = "strength" + score;
 	}
+	
+	function DoSignUpSubmit(){
+		$('#myemail').val($('#myemail2').val());
+		$('#mypassword').val($('#mypassword3').val());
+		$('#myfirstname').val($('#myfirstname2').val());
+		$('#mylastname').val($('#mylastname2').val());
+		$('#mybirthdate').val($('#mybirthmonth').val() + '/1/' + $('#mybirthyear').val());
+		$("#signupForm").submit();
+	}
+
 </script>
 </head>
 <body>
-    <div data-role="page">
+    <div data-role="page" id="pgSignup-1" class="themeDark">
         <div data-role="header">
-        	<a id="btnHome" href="login.php" data-role="button" data-mini="true" data-ajax="false">Back</a>
-	        <h3>Big Easy Reader</h3>
+	        <h3>Big Easy Reader - Sign Up</h3>
         </div><!-- /header -->
         <div data-role="content" data-inset="true">
-	        <div class="subTitle">
-	        	<h3>Sign Up</h3>
-	        </div>
-			<form id="signupForm" action="checksignup.php" method="post" data-ajax="false">
-				<div id="messageError" class="<?php echo($errClass); ?>"><?php echo($errMsg);  ?></div>
-				<label>Email:</label>
-				<input type="text" name="myemail" id="myemail"/>
-				<div id="messageEmail"></div>
-				<br />
-				<label>Password:</label>
-				<input type="password" name="mypassword" id="mypassword"/>
-				<p>
-					<div id="passwordDescription">Password not entered</div>
-					<div id="passwordStrength" class="strength0"></div>
-				</p>
-
-				<br/>
-				<label>Confirm password:</label>
-				<input type="password" name="mypassword2" id="mypassword2"/>
-				<div id="messageConfirm"></div>
-				<br/>
-				<label>First name:</label>
-				<input type="text" name="myfirstname" id="myfirstname"/>
-				<br/>
-				<label>Last name:</label>
-				<input type="text" name="mylastname" id="mylastname"/>
-				<br/>
-				<label>Birth date:</label>
-				<input type="text" name="mybirthdate" id="mybirthdate" />
-				<br/>
-				<div id="messageForm"></div>
-				<div class="alignCenter">
-					<a href="#" id="btnOKSignUp" data-role="button" data-mini="true" data-inline="true">OK, Sign Me Up</a>
-				</div>
-			</form>
+	        <!-- <div class="subTitle alignCenter">
+	        	<h3>1. Email</h3>
+	        </div> -->
+	        <div id="messageError" class="<?php echo($errClass); ?>"><?php echo($errMsg);  ?></div>
+			<label class="fontLarger-1">Email:</label>
+			<input type="text" name="myemail2" id="myemail2" class="fontLarger-1"/>
+			<div id="messageEmail"></div>
 		</div>
+        <div data-role="footerFloating" class="alignRight">
+        	<a href="index.php" data-role="button" data-inline="true" data-ajax="false" class="themeDark fontLarger-1">Back</a>
+        	<a href="#pgSignup-2" data-role="button" data-inline="true" class="themeDark fontLarger-1 nextBtn">Next</a>
+        </div>
 	</div>
+	
+    <div data-role="page" id="pgSignup-2" class="themeDark">
+        <div data-role="header">
+	        <h3>Big Easy Reader - Sign Up</h3>
+        </div><!-- /header -->
+        <div data-role="content" data-inset="true">
+	        <!-- <div class="subTitle alignCenter">
+	        	<h3>2. Password</h3>
+	        </div> -->
+			<label class="fontLarger-1">Password:</label>
+			<input type="password" name="mypassword3" id="mypassword3" class="fontLarger-1"/>
+			<p>
+				<div id="passwordDescription">Password not entered</div>
+				<div id="passwordStrength" class="strength0"></div>
+			</p>
+
+			<br/>
+			<label class="fontLarger-1">Confirm password:</label>
+			<input type="password" name="mypassword2" id="mypassword2" class="fontLarger-1"/>
+			<div id="messageConfirm"></div>
+		</div>
+        <div data-role="footerFloating" class="alignRight">
+        	<a href="#" data-role="button" data-inline="true" data-rel="back" class="themeDark fontLarger-1">Back</a>
+        	<a href="#pgSignup-3" data-role="button" data-inline="true" class="themeDark fontLarger-1 nextBtn">Next</a>
+        </div>
+	</div>
+	
+    <div data-role="page" id="pgSignup-3" class="themeDark">
+        <div data-role="header">
+	        <h3>Big Easy Reader - Sign Up</h3>
+        </div><!-- /header -->
+        <div data-role="content" data-inset="true">
+	        <!-- <div class="subTitle alignCenter">
+	        	<h3>3. First Name</h3>
+	        </div> -->
+			<label class="fontLarger-1">First name:</label>
+			<input type="text" name="myfirstname2" id="myfirstname2" class="fontLarger-1"/>
+		</div>
+        <div data-role="footerFloating" class="alignRight">
+        	<a href="#" data-role="button" data-inline="true" data-rel="back" class="themeDark fontLarger-1">Back</a>
+        	<a href="#pgSignup-4" data-role="button" data-inline="true" class="themeDark fontLarger-1 nextBtn">Next</a>
+        </div>
+	</div>
+	
+    <div data-role="page" id="pgSignup-4" class="themeDark">
+        <div data-role="header">
+	        <h3>Big Easy Reader - Sign Up</h3>
+        </div><!-- /header -->
+        <div data-role="content" data-inset="true">
+	        <!-- <div class="subTitle alignCenter">
+	        	<h3>4. Last Name</h3>
+	        </div> -->
+			<label class="fontLarger-1">Last name:</label>
+			<input type="text" name="mylastname2" id="mylastname2" class="fontLarger-1"/>
+			<br/>
+		</div>
+        <div data-role="footerFloating" class="alignRight">
+        	<a href="#" data-role="button" data-inline="true" data-rel="back" class="themeDark fontLarger-1">Back</a>
+        	<a href="#pgSignup-5" data-role="button" data-inline="true" class="themeDark fontLarger-1 nextBtn">Next</a>
+        </div>
+	</div>
+	
+    <div data-role="page" id="pgSignup-5" class="themeDark">
+        <div data-role="header">
+	        <h3>Big Easy Reader - Sign Up</h3>
+        </div><!-- /header -->
+        <div data-role="content" data-inset="true">
+	        <!-- <div class="subTitle alignCenter">
+	        	<h3>5. Birth Date</h3>
+	        </div> -->
+	        <div style="float:left; width:40%; margin-right:20px;">
+				<label class="fontLarger-1">Birth month:</label>
+				<input type="text" name="mybirthmonth" id="mybirthmonth" data-inline="true" class="fontLarger-1" placeholder="1-12" />
+	        </div>
+	        <div style="float:left; width:40%;">
+				<label class="fontLarger-1">Birth year:</label>
+				<input type="text" name="mybirthyear" id="mybirthyear" data-inline="true" class="fontLarger-1" placeholder="1900 - 2014" />
+	        </div>
+			<br/>
+			<div id="messageForm" class="clear"></div>
+		</div>
+        <div data-role="footerFloating" class="alignRight">
+        	<a href="#" data-role="button" data-inline="true" data-rel="back" class="themeDark fontLarger-1">Back</a>
+        	<a href="#" id="btnOKSignUp" data-role="button" data-inline="true" class="themeDark fontLarger-1 nextBtn">Sign Up</a>
+        </div>
+	</div>
+	
+	
+	<form id="signupForm" action="checksignup.php" method="post" data-ajax="false" class="hide">
+		<input type="text" name="myemail" id="myemail"/>
+		<input type="password" name="mypassword" id="mypassword"/>
+		<input type="text" name="myfirstname" id="myfirstname"/>
+		<input type="text" name="mylastname" id="mylastname"/>
+		<input type="text" name="mybirthdate" id="mybirthdate" />
+	</form>
+	
 </body>
 </html>

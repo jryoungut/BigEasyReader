@@ -10,15 +10,15 @@ var NewsReadInfo = {
     'Link':'',
     'Description':''
 };
-var CalculatedRedicleWidth = $(window).width() * parseInt(Settings.Size)/100;
+var SizeFactor = 12.91667;
+var CalculatedRedicleWidth = $(window).width() * parseInt(Settings.Size * SizeFactor)/100;
 var CustomOptions = {
     'debugLevel':   0,
     'redicleWidth':     CalculatedRedicleWidth,
     'redicleHeight':    CalculatedRedicleWidth * SpritzHelper.verticalScaleFactor,
-    'defaultSpeed':     Settings.Speed,
+    'defaultSpeed':     parseInt(Settings.Speed),
     'speedItems':   [250, 300, 350, 400, 450, 500, 550, 600],
     'controlButtons': [],
-    'anonymousEnabled': true,
     'header': { //show above the redicle
         'close': false, //close "x" button
         'closeHandler': '', //optional callback the dev can set, otherwise use our default
@@ -34,7 +34,7 @@ var CustomOptions = {
     redicle: {
         'lineStrokeWidth': .125,
         'backgroundColor': "#000011",
-        'textNormalPaintColor': "#eeeeff",
+        'textNormalPaintColor': "#FEFEFF",
         'textHighlightPaintColor': "#FAFA00", //red ORP
         'redicleLineColor': "#aaa",
         'redicleLineWidth': 20,
@@ -43,7 +43,9 @@ var CustomOptions = {
         'countdownSlice': 5 // 5 milliseconds
     }
 };
+var ContentUrlDOI = 'http://www.archives.gov/exhibits/charters/print_friendly.html?page=declaration_transcript_content.html&title=NARA%20%7C%20The%20Declaration%20of%20Independence%3A%20A%20Transcription';
 var ContentUrl = 'http://www.archives.gov/exhibits/charters/print_friendly.html?page=declaration_transcript_content.html&title=NARA%20%7C%20The%20Declaration%20of%20Independence%3A%20A%20Transcription';
+var SettingsReturnURL = '';
 var TheSpritzerControl;
 
 SpritzHelper.host = window.location.host;
@@ -113,7 +115,7 @@ SpritzHelper.onStartSpritzClick = function (event) {
     }
 };
 
-SpritzHelper.onTextStartSpritzClick = function (event) {
+SpritzHelper.onTextStartSpritzClick = function (event, ctrl) {
     var text = $('#inputText').val();
     var locale = "en_us;";
 
@@ -134,11 +136,13 @@ SpritzHelper.onTogglePauseSpritzClick = function (event) {
         SpritzHelper.spritzController.pauseSpritzing();
         SpritzHelper.spritzingState = SpritzHelper.SPRITZ_STATE_PAUSED;
         $(ctrl).attr('src', 'images/Play.png');
+        notifyPausePlayEvent.call(this, this.pauseTitle);
     }
     else {
         SpritzHelper.spritzController.resumeSpritzing();
         SpritzHelper.spritzingState = SpritzHelper.SPRITZ_STATE_READING;
         $(ctrl).attr('src', 'images/Pause.png');
+        notifyPausePlayEvent.call(this, this.playTitle);
     }
 };
 
@@ -173,10 +177,20 @@ SpritzHelper.doBtnUI = function () {
             $('#btnNextSentence').addClass('hide');
             break;
         case SpritzHelper.SPRITZ_STATE_READING:
-        case SpritzHelper.SPRITZ_STATE_PAUSED:
+            $('#togglepauseSpritz').attr('src', 'images/Pause.png');
             $('#startSpritz').addClass('hide');
             $('#togglepauseSpritz').removeClass('hide');
-            $('#btnReset').removeClass('hide');
+            $('#btnReset').addClass('hide');
+            $('#btnBackSentence').removeClass('hide');
+            $('#btnBackWord').removeClass('hide');
+            $('#btnNextWord').removeClass('hide');
+            $('#btnNextSentence').removeClass('hide');
+            break;
+        case SpritzHelper.SPRITZ_STATE_PAUSED:
+            $('#togglepauseSpritz').attr('src', 'images/Play.png');
+            $('#startSpritz').addClass('hide');
+            $('#togglepauseSpritz').removeClass('hide');
+            $('#btnReset').addClass('hide');
             $('#btnBackSentence').removeClass('hide');
             $('#btnBackWord').removeClass('hide');
             $('#btnNextWord').removeClass('hide');
@@ -230,32 +244,29 @@ SpritzHelper.init = function () {
 SpritzHelper.GetLineWidth = function(size){
     var lw = 0;
     switch(parseInt(size)){
-        case 100:
+        case 1395:
             lw = 20;
             break;
-        case 90:
+        case 1240:
             lw = 17;
             break;
-        case 80:
+        case 1085:
             lw = 14;
             break;
-        case 70:
+        case 930:
             lw = 11;
             break;
-        case 60:
+        case 775:
             lw = 9;
             break;
-        case 50:
+        case 620:
             lw = 7;
             break;
-        case 40:
+        case 465:
             lw = 5;
             break;
-        case 30:
+        case 310:
             lw = 3;
-            break;
-        case 40:
-            lw = 1;
             break;
         
     }
@@ -265,63 +276,62 @@ SpritzHelper.GetLineWidth = function(size){
 
 
  SpritzHelper.SetThemeColors = function(){
-    if(Settings.ColorTheme === 'Dark Theme'){
-        $('div').removeClass('themeLight');
-        $('div').addClass('themeDark');
-        $('h3').removeClass('themeLight');
-        $('h3').addClass('themeDark');
-        $('a').removeClass('themeLight');
-        $('a').addClass('themeDark');
-        $('#spnDark').removeClass('themeLight');
-        $('#spnDark').addClass('themeDark');
-        $('#spnLight').removeClass('themeLight');
-        $('#spnLight').addClass('themeDark');
-        $('#spnDark').html('&#10152;');
-        $('#spnLight').html('');
-        $('.spritzer-container').removeClass('themeLight');
-        $('.spritzer-container').addClass('themeDark');
-    }
-    else{
-        $('div').removeClass('themeDark');
-        $('div').addClass('themeLight');
-        $('h3').removeClass('themeDark');
-        $('h3').addClass('themeLight');
-        $('a').removeClass('themeDark');
-        $('a').addClass('themeLight');
-        $('#spnDark').removeClass('themeDark');
-        $('#spnDark').addClass('themeLight');
-        $('#spnLight').removeClass('themeDark');
-        $('#spnLight').addClass('themeLight');
-        $('#spnDark').html('');
-        $('#spnLight').html('&#10152;');
-        $('.spritzer-container').removeClass('themeDark');
-        $('.spritzer-container').addClass('themeLight');
+     SpritzHelper.ChangeTheme();
+    // if(Settings.ColorTheme === 'Dark Theme'){
+        // $('div').removeClass('themeLight');
+        // $('div').addClass('themeDark');
+        // $('h3').removeClass('themeLight');
+        // $('h3').addClass('themeDark');
+        // $('a').removeClass('themeLight');
+        // $('a').addClass('themeDark');
+        // $('#spnDark').removeClass('themeLight');
+        // $('#spnDark').addClass('themeDark');
+        // $('#spnLight').removeClass('themeLight');
+        // $('#spnLight').addClass('themeDark');
+        // $('#spnDark').html('&#10152;');
+        // $('#spnLight').html('');
+        // $('.spritzer-container').removeClass('themeLight');
+        // $('.spritzer-container').addClass('themeDark');
+    // }
+    // else{
+        // $('div').removeClass('themeDark');
+        // $('div').addClass('themeLight');
+        // $('h3').removeClass('themeDark');
+        // $('h3').addClass('themeLight');
+        // $('a').removeClass('themeDark');
+        // $('a').addClass('themeLight');
+        // $('#spnDark').removeClass('themeDark');
+        // $('#spnDark').addClass('themeLight');
+        // $('#spnLight').removeClass('themeDark');
+        // $('#spnLight').addClass('themeLight');
+        // $('#spnDark').html('');
+        // $('#spnLight').html('&#10152;');
+        // $('.spritzer-container').removeClass('themeDark');
+        // $('.spritzer-container').addClass('themeLight');
+    // }
+};
+
+SpritzHelper.ChangeTheme = function(){
+    switch(parseInt(Settings.ColorThemeID)){
+        case 1:
+            $('.themeLight').addClass('themeDark');
+            $('.themeLight').removeClass('themeLight');
+            $('.spritzer-container').removeClass('themeLight');
+            $('.spritzer-container').addClass('themeDark');
+
+            break;
+        case 2:
+            $('.themeDark').addClass('themeLight');
+            $('.themeDark').removeClass('themeDark');
+            $('.spritzer-container').removeClass('themeDark');
+            $('.spritzer-container').addClass('themeLight');
+        break;
     }
 };
 
- SpritzHelper.SetFontSize = function(){
-    switch(Settings.Size){
-        case "20":
-        case "30":
-        case "40":
-            $('div').addClass('themeFontSmall');
-            $('h3').addClass('themeFontSmall');
-            $('a').addClass('themeFontSmall');
-            break;
-        case "50":
-        case "60":
-        case "70":
-            $('div').addClass('themeFontMedium');
-            $('h3').addClass('themeFontMedium');
-            $('a').addClass('themeFontMedium');
-            break;
-        case "80":
-        case "90":
-        case "100":
-            $('div').addClass('themeFontLarge');
-            $('h3').addClass('themeFontLarge');
-            $('a').addClass('themeFontLarge');
-            break;
+SpritzHelper.SetFontSize = function(){
+    if(parseInt(Settings.Size) > 84){
+        $('body').css('font-size', '24pt');
     }
 };
 
@@ -399,40 +409,95 @@ SpritzHelper.InitSpritz = function (autoStart) {
 };
 
 SpritzHelper.SetupSpritzerUI = function(){
-    CalculatedRedicleWidth = $(window).width() * parseInt(Settings.Size)/100;
+    //CalculatedRedicleWidth = $(window).width() * parseInt(Settings.Size)/100;
+    CalculatedRedicleWidth = parseInt(Settings.Size * SizeFactor);
 
     CustomOptions['redicleWidth'] = CalculatedRedicleWidth;
     CustomOptions['redicleHeight'] = CalculatedRedicleWidth * SpritzHelper.verticalScaleFactor;
 
-    var redicleLineWidth = SpritzHelper.GetLineWidth(Settings.Size);
+    var redicleLineWidth = SpritzHelper.GetLineWidth(Settings.Size * SizeFactor);
     CustomOptions.redicle['redicleLineWidth'] = redicleLineWidth;
+    
+    var backgroundColorString = '#00002E';
+    var textNormalPaintColorString = "#FEFEFF";
+    var textHighlightPaintColorString = "#FAFA00";
+    switch(parseInt(Settings.ColorThemeID)){
+        case 1:
+            backgroundColorString = '#00002E';
+            textNormalPaintColorString = "#FEFEFF";
+            textHighlightPaintColorString = "#FAFA00";
+            break;
+        case 2:
+            backgroundColorString = '#FEFEFF';
+            textNormalPaintColorString = "#000000";
+            textHighlightPaintColorString = "#FA0000";
+            break;
+    }
+    CustomOptions.redicle['backgroundColor'] = backgroundColorString;
+    CustomOptions.redicle['textNormalPaintColor'] = textNormalPaintColorString;
+    CustomOptions.redicle['textHighlightPaintColor'] = textHighlightPaintColorString;
 };
 
-SpritzHelper.CenterSpritzerControl = function (ctrl, page){
+SpritzHelper.CenterSpritzerControl = function (ctrl, page, centerType){
     var cW = CalculatedRedicleWidth;
     var cH = CalculatedRedicleWidth*SpritzHelper.verticalScaleFactor;
     var win = $(window);
+    var magicNumber = 200;
     var winWidth = win.width();
-    var winHeight = win.height() - $('#' + $(page).prop('id') + ' .divCtrlHolder').position().top -150;
+    var winHeight = win.height() - $('#' + $(page).prop('id') + ' .divCtrlHolder').position().top - 150;
     
     //ctrl.css('margin-top', ((winHeight/2) - cH/2) + 'px');
-    ctrl.css('margin-top', '200px');
-    ctrl.css('margin-left', ((winWidth/2) - cW/2) + 'px');
+    if(centerType === 2){
+        magicNumber = 20;
+    }
+    else if(centerType === 3){
+        magicNumber = 20;
+    }
+    else if(centerType === 4){
+        winHeight = win.height();
+        magicNumber = 100;
+    }
+    ctrl.css('margin-top', magicNumber + 'px');
+    ctrl.css('margin-left', ((winWidth/2) - cW/2 - 20) + 'px');
     
 };
 
 SpritzHelper.ResetFixation = function (){
-    Settings.Fixation = '10,10';
+    Settings.Fixation = '0,0';
     SpritzHelper.SaveFixation();
-    SpritzHelper.InitCanvas();
-    SpritzHelper.RefreshPage();
+    
+    var fpX = Settings.Fixation.split(',')[0];
+    var fpY = Settings.Fixation.split(',')[1];
+    $('.fixationPoint').css('left', fpX + 'px');
+    $('.fixationPoint').css('top', fpY + 'px');
+    $('.fixationPoint').removeClass('hide');
+    $('.fixationPoint').draggable({
+        stop:function(){
+            var position = $(this).position();
+            var newPos = position.left + ',' + position.top;
+            Settings.Fixation = newPos;
+            SpritzHelper.SaveFixation();
+        }
+    });
 };
 
 SpritzHelper.NoneFixation = function (){
-    Settings.Fixation = 'None';
+    Settings.Fixation = '-1000,-1000';
     SpritzHelper.SaveFixation();
-    SpritzHelper.InitCanvas();
-    SpritzHelper.RefreshPage();
+    
+    var fpX = Settings.Fixation.split(',')[0];
+    var fpY = Settings.Fixation.split(',')[1];
+    $('.fixationPoint').css('left', fpX + 'px');
+    $('.fixationPoint').css('top', fpY + 'px');
+    $('.fixationPoint').removeClass('hide');
+    $('.fixationPoint').draggable({
+        stop:function(){
+            var position = $(this).position();
+            var newPos = position.left + ',' + position.top;
+            Settings.Fixation = newPos;
+            SpritzHelper.SaveFixation();
+        }
+    });
 };
 
 SpritzHelper.RefreshPage = function () {
@@ -444,6 +509,15 @@ SpritzHelper.GoToNewsReader = function(lnk){
     //$.mobile.changePage('#pgNewsRead');
     //$.mobile.pageContainer.pagecontainer ("change", "#pgNewsRead", {reloadPage: false});
     window.location.href = "#pgNewsRead";
+};
+
+SpritzHelper.GoToSettings = function(retUrl){
+    SettingsReturnURL = retUrl;
+    $('body').pagecontainer('change', '#pgSettingsColor');
+};
+
+SpritzHelper.GoBackFromSettings = function(){
+    $('body').pagecontainer('change', SettingsReturnURL);
 };
 
 SpritzHelper.DoGlassCover = function (){
@@ -620,9 +694,16 @@ SpritzHelper.InitCanvas = function (){
     }
 };
 
-SpritzHelper.ShowRSS = function (str) {
-        if (str.length==0) {
-            $('#newsStories').html('');
+SpritzHelper.GetNewsList = function(ctrl){
+    //////ctrl.next().find('ul').html('<li class="ui-first-child"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Hi</a></li>');
+    SpritzHelper.ShowRSS(ctrl);
+};
+
+SpritzHelper.ShowRSS = function (ctrl) {
+    var ulCtrl = ctrl.next().find('ul');
+    if (ctrl.data('newssource').length==0) {
+        ulCtrl.html('');
+        //////$('#newsStories').html('');
         return;
     }
     
@@ -636,12 +717,12 @@ SpritzHelper.ShowRSS = function (str) {
     
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            $('#newsStories').html(xmlhttp.responseText);
-            $('#newsStories').listview('refresh');
+            ulCtrl.html(xmlhttp.responseText);
+            //////$('#newsStories').listview('refresh');
         }
     };
     
-    xmlhttp.open("GET","getrss.php?q="+str,true);
+    xmlhttp.open("GET","getrss.php?q="+ctrl.data('newssource'),true);
     xmlhttp.send();
 };
 

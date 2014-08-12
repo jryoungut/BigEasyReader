@@ -37,14 +37,7 @@ switch($err){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Log In</title>
     
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
-	
-    <script type="text/javascript" src="//sdk.spritzinc.com/jQuery/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="//sdk.spritzinc.com/js/1.2/js/spritz.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
-    <script type="text/javascript" src="scripts/modernizr-2.0.6.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="css/ezBigRead.css">
+	<?php include("_jqueryPartial.php"); ?>
 
     <script type="text/javascript">
 		$(document).on('pageinit', function() {
@@ -75,35 +68,54 @@ switch($err){
 		}
 
 		function DoLogin(){
+			$('#myemail').val($('#myemail2').val());
+			$('#mypassword').val($('#mypassword2').val());
 			$("#frmLogin").submit();
 		}
 </script>
 </head>
 <body>
-    <div data-role="page">
+    <div data-role="page" id="pgLogin1" class="themeDark">
         <div data-role="header">
-        	<a id="btnHome" href="pages.php" data-role="button" data-mini="true" class="hide">Home</a>
-	        <h3>Big Easy Reader</h3>
+	        <h3>Big Easy Reader - Log In</h3>
         </div><!-- /header -->
         <div data-role="content" data-inset="true">
-	        <div class="subTitle">
-	        	<h3>Log In</h3>
+	        <div class="subTitle alignCenter">
+	        	<span class="themeDark fontLarger-1">1. Log In Now, or... </span>
+	        	<a id="btnSignUpPage" href="signup.php" class="fontLarger-1" data-inline='true' data-role='button' data-mini='true' data-ajax="false">Sign Up</a>
 	        </div>
-			<form id="frmLogin" action="checklogin.php" method="post" data-ajax="false">
-				<div id="messageError" class="<?php echo($errClass); ?> hide"><?php echo($errMsg);  ?></div>
-				<label>Email :</label>
-				<input type="text" name="myemail" id="myemail"/>
-				<div id="messageEmail"></div>
-				<br />
-				<label>Password :</label>
-				<input type="password" name="mypassword" id="mypassword"/><br/>
-				<div class="alignCenter">
-					<a id="btnLogInPage" href="" onclick='DoLogin();' data-inline='true' data-role='button' data-mini='true'>Login</a>
-					<label>&nbsp;or&nbsp;</label>
-					<a id="btnSignUpPage" href="signup.php" data-inline='true' data-role='button' data-mini='true' data-ajax="false">Sign Up</a>
-				</div>
-			</form>
+			<div id="messageError" class="<?php echo($errClass); ?>"><?php echo($errMsg);  ?></div>
+			<label class="fontLarger-1">Email:</label>
+			<input type="text" name="myemail2" id="myemail2" class="fontLarger-2"/>
+			<div id="messageEmail"></div>
 		</div>
+        <div data-role="footer" class="alignRight">
+        	<a href="index.php" data-role="button" data-mini="true" data-ajax="false" class="themeDark fontLarger-1">Back</a>
+        	<a href="#pgLogin2" data-role="button" data-mini="true" class="themeDark fontLarger-1 nextBtn">Next</a>
+        </div>
 	</div>
+	
+    <div data-role="page" id="pgLogin2" class="themeDark">
+        <div data-role="header">
+        	<a id="btnHome" href="index.php" data-role="button" data-mini="true" class="hide">Home</a>
+	        <h3>Big Easy Reader - Log In</h3>
+        </div><!-- /header -->
+        <div data-role="content" data-inset="true">
+	        <div class="subTitle alignCenter">
+	        	<span class="themeDark fontLarger-1">2. Password</span>
+	        </div>
+				<label class="fontLarger-1">Password:</label>
+				<input type="password" name="mypassword2" id="mypassword2" class="fontLarger-2"/><br/>
+		</div>
+        <div data-role="footer" class="alignRight">
+        	<a href="#" data-role="button" data-mini="true" data-rel="back" class="themeDark fontLarger-1">Back</a>
+        	<a href="#" onclick="DoLogin();" data-role="button" data-mini="true" class="themeDark fontLarger-1 nextBtn">Log In</a>
+        </div>
+	</div>
+
+	<form id="frmLogin" action="checklogin.php" method="post" data-ajax="false" class="hide">
+		<input type="text" name="myemail" id="myemail" class="fontLarger-2"/>
+		<input type="password" name="mypassword" id="mypassword"/>
+	</form>
 </body>
 </html>

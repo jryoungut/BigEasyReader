@@ -44,11 +44,11 @@ else {
 				$_SESSION['SUPERUSER'] = 0;
 			}
 			$_SESSION['brUserID'] = $row['ID'];
-			header("location:pages.php");
+			header("location:index.php");
 		}
 	}
 	else{
-		header("location:login.php?e=1");
+		header("location:index.php?e=1");
 	}
 }
 

@@ -599,7 +599,7 @@ include ("dbClose.php");
         	<a href="#pgHome" data-role="button" data-mini="true" id="hdrBack" data-rel="back" data-transition="reverse slide">Back</a>
         	<h3>About</h3>
         </div><!-- /header -->
-        <div data-role="content">
+        <div data-role="content" class="bigText">
         	<p>We're all about making things easy.</p>
         	<p>And we want reading to be easy for you, too.</p>
         </div><!-- /content -->

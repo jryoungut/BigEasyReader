@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Aptana Home Page</title>
+        
+        <script type="text/javascript">
+            var init = function() {    
+                // Customize controller's options
+                var options = {controlButtons: ["rewind", "back", "pauseplay", "forward", "end"]};
+             
+                // Attach controller's container to this page's "spritzer" containers
+                var spritzerController = new SPRITZ.spritzinc.SpritzerController(options);
+                spritzerController.attach($("#spritzer"));
+             
+                // Create the BookController instance
+                new SPRITZ.bookmark.BookController(spritzerController);
+            };
+        </script>
+    </head>
+    <body>
+        <div id="spritzer"></div>
+
+        <p>
+            <div class='spritz-book'>
+                <div class='book-title'>
+                    <span class='book-name'>Animal Farm</span>, &nbsp;&nbsp; by &nbsp; <font size="5"><strong>George Orwell</strong></font>
+                </div>
+                <div class='book-title'>
+                    Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <br>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter1.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 1</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter2.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 2</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter3.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 3</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter4.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 4</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter5.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 5</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter6.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 6</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter7.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 7</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter8.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 8</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter9.html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 9</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+                <div class='book-chapter'
+                data-url="http://ebooks.adelaide.edu.au/o/orwell/george/o79a/chapter10html"
+                data-selector="p"
+                >
+                    <div class='status-image'></div>
+                    <span class='chapter-name'>Chapter 10</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total Time:&nbsp;<span class='total-time'></span>
+                    &nbsp;&nbsp;&nbsp;Remaining Time:&nbsp;<span class='remaining-time'></span>
+                </div>
+            </div>
+        </p>
+    </body>
+</html>

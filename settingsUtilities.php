@@ -19,14 +19,14 @@ session_start();
 // Make sure we have a logged in user and that a function is being called
 if(isset($_SESSION['brUserID'])){
 	$userID = $_SESSION['brUserID'];
-} else {
+} //else {
 	// User is not properly logged in...  exit.
-	include("dbClose.php");
+	//include("dbClose.php");
 	//echo "=== Not Logged In ===";
-	header("location:login.php");
-	ob_end_flush();
-	exit;
-}
+	//header("location:index.php");
+	//ob_end_flush();
+	//exit;
+//}
 
 
 //Get the setting values
@@ -34,6 +34,11 @@ function GetSettingsValues($conn){
 	//################################################################
 	//Get Setting for user
 	$userID = $_SESSION['brUserID'];
+	$settingColor = '1';
+	$settingSize = '60';
+	$settingSpeed = '210';
+	$settingFixation = '0,0';
+	
 	$query = "SELECT SettingID, SettingValue FROM settings WHERE UserID = '" . $userID . "'";
 	$result = $conn -> query($query);
 	if ($result === false) {

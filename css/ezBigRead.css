@@ -483,3 +483,18 @@ p {
     width:100%;
     text-align:center;
 }
+
+
+.js-marquee,
+.marquee-with-options,
+.marquee-vert-before,
+.marquee-vert {
+	/*width: 300px;*/
+	font-size:2em;
+	overflow: hidden;
+	/*border:1px solid #ccc;*/
+}
+
+.bigText p{
+	font-size:4em;
+}
